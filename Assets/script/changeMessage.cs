@@ -109,15 +109,29 @@ public class changeMessage : MonoBehaviour {
 	IEnumerable<NewsBody> GetFromYahoo() {
 		List<string> siteList = new List<string> ();
 
+		//プロトコル違い
 		//siteList.Add ("feed://www3.nhk.or.jp/rss/news/cat0.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/world/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
+
+		//文字コードがSJIS
+		//siteList.Add("http://feed.rssad.jp/rss/news24/index.rdf");
+
+		//アルファ 解析がうまくいっていない？
+		//siteList.Add ("http://alfalfalfa.com/index.rdf");
+
+		//はてブ 解析がうまくいっていない？
+		//http://sprint-life.hatenablog.com/entry/2014/01/15/203535
+		//siteList.Add ("http://b.hatena.ne.jp/entrylist.rss");
+
+		//
+
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/world/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
 
 		foreach (var site in siteList) {
 			var results = GetRSSstring (site);
