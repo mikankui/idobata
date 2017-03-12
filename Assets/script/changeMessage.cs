@@ -90,28 +90,39 @@ public class changeMessage : MonoBehaviour {
 	IEnumerable<NewsBody> GetFromYahoo() {
 		List<string> siteList = new List<string> ();
 
+		//siteList.Add ("feed://www3.nhk.or.jp/rss/news/cat0.xml");
 		siteList.Add ("http://news.yahoo.co.jp/pickup/world/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
+		//siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
 
 		foreach (var site in siteList) {
 			var results = GetRSSstring (site);
-			int i = 0;
-			foreach (var r in results) {
-				i++;
-				CountTex.GetComponent<TextMesh> ().text = ""+r;
 
-				XDocument xdoc = XDocument.Parse(""+r);
-				var nodes = xdoc.Root.Descendants("title");
-				foreach (var node in nodes) {
-					if (node.Value.StartsWith("[PR]") == false) {
-						string s = node.Value.Replace(" - Yahoo!天気・災害", "");
-						yield return new NewsBody("",s,site,"Yahoo!");
+			foreach (string r in results) {
+
+				XDocument xdoc = XDocument.Parse(r);
+				// 子要素を取得
+				var items = xdoc.Root.Descendants("item");
+				foreach (XElement item in items) {
+					//XDocument parseItem = XDocument.Parse(item);
+					//string title = parseItem.Root.Element ("title").Value;
+					//if (title.StartsWith("[PR]") == false) {
+					//	//string title = ""+parseItem.Root.Descendants ("title");
+					//	string link = parseItem.Root.Element("link").Value;
+					//	string  discription = parseItem.Root.Element("title").Value;
+					//	yield return new NewsBody(title,discription,link,"Yahoo!");
+					//}
+					string title = item.Element ("title").Value;
+					if (title.StartsWith("[PR]") == false) {
+						//string title = ""+parseItem.Root.Descendants ("title");
+						string link = item.Element("link").Value;
+						string  discription = item.Element("title").Value;
+						yield return new NewsBody(title,discription,link,"Yahoo!");
 					}
 				}
 			}
@@ -119,8 +130,6 @@ public class changeMessage : MonoBehaviour {
 	}
 
 	IEnumerable GetRSSstring(string site) {
-
-		CountTex.GetComponent<TextMesh> ().text = "yahoo0";
 		WebClient wc = new WebClient();
 		wc.Encoding = System.Text.Encoding.UTF8;
 
