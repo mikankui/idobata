@@ -5,12 +5,17 @@ using UnityEngine.Networking;
 using System;
 using System.Net;
 using System.Xml.Linq;
+using UnityEngine.UI;
 
 public class changeMessage : MonoBehaviour {
 
-	GameObject CountTex;
+	//GameObject CountTex;
 	Queue<NewsBody> NewsQueue = new Queue<NewsBody>();
 	Coroutine retC;
+	public GameObject title;
+	public GameObject body;
+	public GameObject link;
+	public GameObject siteName;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +23,7 @@ public class changeMessage : MonoBehaviour {
 		//start 
 		Debug.Log("start!!");
 		// MESSAGE表示フィールドを取得
-		CountTex = GameObject.Find ("message");
+		//CountTex = GameObject.Find ("message");
 		// ニュース自動切り替え
 		Time.timeScale = 0.1f;
 		retC = StartCoroutine (waitingNextNews());
@@ -62,7 +67,17 @@ public class changeMessage : MonoBehaviour {
 
 			//ニュースの更新
 			NewsBody nb = NewsQueue.Dequeue();
-			CountTex.GetComponent<TextMesh> ().text = nb.Body;
+			//CountTex.GetComponent<TextMesh> ().text = nb.Body;
+			//string message = 
+			//	"[title] :" + nb.Title + Environment.NewLine +
+			//	"[body] :" + nb.Body + Environment.NewLine +
+			//	"[site] :" + nb.SiteName + Environment.NewLine +
+			//	"[url] :" + nb.Url;
+			// テキストを変更
+			title.GetComponent<UnityEngine.UI.Text>().text = nb.Title;  
+			body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
+			link.GetComponent<UnityEngine.UI.Text>().text = nb.Link;
+			siteName.GetComponent<UnityEngine.UI.Text>().text = nb.SiteName;
 			//自動切り替え時間のリセット
 			StopCoroutine(retC);
 			retC = StartCoroutine (waitingNextNews());
@@ -77,12 +92,16 @@ public class changeMessage : MonoBehaviour {
 			//ニュースの更新
 
 			NewsBody nb = NewsQueue.Dequeue ();
-			string message = 
-				"[title] :" + nb.Title + Environment.NewLine +
-				"[body] :" + nb.Body + Environment.NewLine +
-				"[site] :" + nb.SiteName + Environment.NewLine +
-				"[url] :" + nb.Url;
-			CountTex.GetComponent<TextMesh> ().text = message;
+			//string message = 
+			//	"[title] :" + nb.Title + Environment.NewLine +
+			//	"[body] :" + nb.Body + Environment.NewLine +
+			//	"[site] :" + nb.SiteName + Environment.NewLine +
+			//	"[url] :" + nb.Url;
+			// テキストを変更
+			title.GetComponent<UnityEngine.UI.Text>().text = nb.Title;  
+			body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
+			link.GetComponent<UnityEngine.UI.Text>().text = nb.Link;
+			siteName.GetComponent<UnityEngine.UI.Text>().text = nb.SiteName;
 
 		}
 	}
@@ -92,13 +111,13 @@ public class changeMessage : MonoBehaviour {
 
 		//siteList.Add ("feed://www3.nhk.or.jp/rss/news/cat0.xml");
 		siteList.Add ("http://news.yahoo.co.jp/pickup/world/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
 
 		foreach (var site in siteList) {
 			var results = GetRSSstring (site);
@@ -135,12 +154,12 @@ public class changeMessage : MonoBehaviour {
 
 		Uri url = new Uri(site);
 		string result = "";
-		CountTex.GetComponent<TextMesh> ().text = site;
+		//CountTex.GetComponent<TextMesh> ().text = site;
 		try{
 			result = wc.DownloadString(url);
 			Debug.Log( result );
 		}catch( Exception ex ) {
-			CountTex.GetComponent<TextMesh> ().text = ex.Message;
+			//CountTex.GetComponent<TextMesh> ().text = ex.Message;
 			Debug.Log( $"エラー : {ex.Message}" );
 		}
 		yield return result;
@@ -174,7 +193,7 @@ class NewsBody
 {
 	private string title = "";
 	private string body = "";
-	private string url="";
+	private string link="";
 	private string siteName="";
 
 	public string Title
@@ -185,20 +204,20 @@ class NewsBody
 	{
 		get {return this.body;}
 	}
-	public string Url
+	public string Link
 	{
-		get {return this.url;}
+		get {return this.link;}
 	}
 	public string SiteName
 	{
 		get {return this.siteName;}
 	}
 
-	public NewsBody(string title, string body, string url, string siteName)
+	public NewsBody(string title, string body, string link, string siteName)
 	{
 		this.title = title;
 		this.body = body;
-		this.url = url;
+		this.link = link;
 		this.siteName = siteName;
 	}
 	public void Print()

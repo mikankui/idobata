@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\script\autoFontAguster.cs" />
      <Compile Include="Assets\script\changeMessage.cs" />
+     <Compile Include="Assets\script\move.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
