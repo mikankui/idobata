@@ -40,3 +40,9 @@
 /Users/kirakentaro/unityWork/idobataPROTOTYPE/idobata/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/kirakentaro/unityWork/idobataPROTOTYPE/idobata/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/kirakentaro/unityWork/idobataPROTOTYPE/idobata/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/kira/unity/idobataPROTOTYPE/Temp/bin/Debug/Hnx8.ReadJEnc.dll
+/Users/kira/unity/idobataPROTOTYPE/Temp/bin/Debug/System.ServiceModel.Syndication.dll
+/Users/kira/unity/idobataPROTOTYPE/Temp/bin/Debug/system.xml.dll
+/Users/kira/unity/idobataPROTOTYPE/Temp/bin/Debug/system.xml.serialization.dll
+/Users/kira/unity/idobataPROTOTYPE/Temp/bin/Debug/unity_full_system.servicemodel.dll
+/Users/kira/unity/idobataPROTOTYPE/Temp/bin/Debug/unity_full_system.servicemodel.web.dll

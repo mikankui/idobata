@@ -67,11 +67,8 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
- <Reference Include="Hnx8.ReadJEnc">
- <HintPath>/Users/kira/unity/idobataPROTOTYPE/Assets/lib/Hnx8.ReadJEnc.dll</HintPath>
- </Reference>
- <Reference Include="System.ServiceModel.Syndication">
- <HintPath>/Users/kira/unity/idobataPROTOTYPE/Assets/lib/System.ServiceModel.Syndication.dll</HintPath>
+ <Reference Include="unity_full_system.servicemodel.web">
+ <HintPath>/Users/kira/unity/idobataPROTOTYPE/Assets/lib/unity_full_system.servicemodel.web.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,7 +5,9 @@ using UnityEngine.Networking;
 using System;
 using System.Net;
 using System.Xml.Linq;
+using System.Xml;
 using UnityEngine.UI;
+using System.ServiceModel.Syndication;
 
 public class changeMessage : MonoBehaviour {
 
@@ -67,13 +69,6 @@ public class changeMessage : MonoBehaviour {
 
 			//ニュースの更新
 			NewsBody nb = NewsQueue.Dequeue();
-			//CountTex.GetComponent<TextMesh> ().text = nb.Body;
-			//string message = 
-			//	"[title] :" + nb.Title + Environment.NewLine +
-			//	"[body] :" + nb.Body + Environment.NewLine +
-			//	"[site] :" + nb.SiteName + Environment.NewLine +
-			//	"[url] :" + nb.Url;
-			// テキストを変更
 			title.GetComponent<UnityEngine.UI.Text>().text = nb.Title;  
 			body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
 			link.GetComponent<UnityEngine.UI.Text>().text = nb.Link;
@@ -90,14 +85,7 @@ public class changeMessage : MonoBehaviour {
 		while (true) {
 			yield return new WaitForSecondsRealtime (2.0f);
 			//ニュースの更新
-
 			NewsBody nb = NewsQueue.Dequeue ();
-			//string message = 
-			//	"[title] :" + nb.Title + Environment.NewLine +
-			//	"[body] :" + nb.Body + Environment.NewLine +
-			//	"[site] :" + nb.SiteName + Environment.NewLine +
-			//	"[url] :" + nb.Url;
-			// テキストを変更
 			title.GetComponent<UnityEngine.UI.Text>().text = nb.Title;  
 			body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
 			link.GetComponent<UnityEngine.UI.Text>().text = nb.Link;
@@ -120,7 +108,7 @@ public class changeMessage : MonoBehaviour {
 
 		//はてブ 解析がうまくいっていない？
 		//http://sprint-life.hatenablog.com/entry/2014/01/15/203535
-		//siteList.Add ("http://b.hatena.ne.jp/entrylist.rss");
+		siteList.Add ("http://b.hatena.ne.jp/entrylist.rss");
 
 		//
 
@@ -134,29 +122,31 @@ public class changeMessage : MonoBehaviour {
 		//siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
 
 		foreach (var site in siteList) {
-			var results = GetRSSstring (site);
+			//var results = GetRSSstring (site);
 
-			foreach (string r in results) {
+			//foreach (string r in results) {
+			using (XmlReader rdr = XmlReader.Create(site))
+			{
+				SyndicationFeed feed = SyndicationFeed.Load(rdr);
 
-				XDocument xdoc = XDocument.Parse(r);
+				//XDocument xdoc = XDocument.Parse(r);
 				// 子要素を取得
-				var items = xdoc.Root.Descendants("item");
-				foreach (XElement item in items) {
-					//XDocument parseItem = XDocument.Parse(item);
-					//string title = parseItem.Root.Element ("title").Value;
-					//if (title.StartsWith("[PR]") == false) {
-					//	//string title = ""+parseItem.Root.Descendants ("title");
-					//	string link = parseItem.Root.Element("link").Value;
-					//	string  discription = parseItem.Root.Element("title").Value;
-					//	yield return new NewsBody(title,discription,link,"Yahoo!");
-					//}
-					string title = item.Element ("title").Value;
-					if (title.StartsWith("[PR]") == false) {
-						//string title = ""+parseItem.Root.Descendants ("title");
-						string link = item.Element("link").Value;
-						string  discription = item.Element("title").Value;
-						yield return new NewsBody(title,discription,link,"Yahoo!");
-					}
+				//var items = xdoc.Root.Descendants("item");
+				//foreach (XElement item in items) {
+				//	string title = item.Element ("title").Value;
+				//	if (title.StartsWith("[PR]") == false) {
+				//		string link = item.Element("link").Value;
+				//		string  discription = item.Element("title").Value;
+				//		yield return new NewsBody(title,discription,link,"Yahoo!");
+				//	}
+				//}
+				foreach (SyndicationItem item in feed.Items) {
+					string title =  item.Title.Text;
+					string discription =  item.Summary.Text;
+					string link =(item.Links.Count > 0
+						? item.Links[0].Uri.AbsolutePath : "");
+
+					yield return new NewsBody(title,discription,link,"");
 				}
 			}
 		}
