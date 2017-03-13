@@ -7,7 +7,6 @@ using System.Net;
 using System.Xml.Linq;
 using System.Xml;
 using UnityEngine.UI;
-using System.ServiceModel.Syndication;
 
 public class changeMessage : MonoBehaviour {
 
@@ -83,7 +82,7 @@ public class changeMessage : MonoBehaviour {
 
 	IEnumerator waitingNextNews(){
 		while (true) {
-			yield return new WaitForSecondsRealtime (2.0f);
+			yield return new WaitForSecondsRealtime (4.0f);
 			//ニュースの更新
 			NewsBody nb = NewsQueue.Dequeue ();
 			title.GetComponent<UnityEngine.UI.Text>().text = nb.Title;  
@@ -96,6 +95,7 @@ public class changeMessage : MonoBehaviour {
 
 	IEnumerable<NewsBody> GetFromYahoo() {
 		List<string> siteList = new List<string> ();
+		List<NewsBody> newsBody = new List<NewsBody> ();
 
 		//プロトコル違い
 		//siteList.Add ("feed://www3.nhk.or.jp/rss/news/cat0.xml");
@@ -108,89 +108,108 @@ public class changeMessage : MonoBehaviour {
 
 		//はてブ 解析がうまくいっていない？
 		//http://sprint-life.hatenablog.com/entry/2014/01/15/203535
-		siteList.Add ("http://b.hatena.ne.jp/entrylist.rss");
+		//siteList.Add ("http://b.hatena.ne.jp/entrylist.rss");
 
-		//
+		//asahi
+		//siteList.Add ("http://news.owata-net.com/rss/index.xml");
 
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/world/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
-		//siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
+		//jiji.com
+		//siteList.Add ("http://www.jiji.com");
+
+		//2ch http://web-terminal.blogspot.jp/2013/12/2chrss.html
+		//腹筋崩壊ニュース	
+		siteList.Add ("http://www.fknews-2ch.net/index.rdf");
+		//ニュース30over	
+		http://www.news30over.com/index.rdf
+		//らばQ	
+		siteList.Add ("http://labaq.com/index.rdf");
+		//今日速2ch	
+		siteList.Add ("http://kyousoku.net/index.rdf");
+		//2chまとめ　あうあうあー	
+		siteList.Add ("http://ababababa7.blog.fc2.com/?xml");
+		//biz2+速報	
+		siteList.Add ("http://blog.livedoor.jp/biz_2/index.rdf");
+		//ニュー速どうでしょう	
+		siteList.Add ("http://blog.livedoor.jp/dudeshow/index.rdf");
+		//SS上手にまとめれたー　-SSまとめブログ-	
+		siteList.Add ("http://ssjyouzu.blog.fc2.com/?xml");
+		//Q速報	
+		siteList.Add ("http://blog.livedoor.jp/qsoku/index.rdf");
+		//ぷに速 ver. あんこ	
+		siteList.Add ("http://punisoku.blog54.fc2.com/?xml");
+		//ワニ速	
+		siteList.Add ("http://wanisoku.blog.fc2.com/?xml");
+		//キブ速	
+		siteList.Add ("http://kibu-soku.ldblog.jp/index.rdf");
+		//2ちゅんまとめ	
+		siteList.Add ("http://matomemamasit.seesaa.net/index20.rdf");
+
+
+		//ITmedia
+		siteList.Add("http://rss.rssad.jp/rss/itmnews/2.0/news_bursts.xml");
+
+		//mainiti
+		siteList.Add("http://rss.rssad.jp/rss/mainichi/flash.rss");
+
+		//Yahoo
+		siteList.Add ("http://news.yahoo.co.jp/pickup/world/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
+		siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
+
+
 
 		foreach (var site in siteList) {
-			//var results = GetRSSstring (site);
 
-			//foreach (string r in results) {
-			using (XmlReader rdr = XmlReader.Create(site))
-			{
-				SyndicationFeed feed = SyndicationFeed.Load(rdr);
+			try {
+				// すぱこーRSSフィードの読み込みます。
+				XElement spx = XElement.Load( site );
 
-				//XDocument xdoc = XDocument.Parse(r);
-				// 子要素を取得
-				//var items = xdoc.Root.Descendants("item");
-				//foreach (XElement item in items) {
-				//	string title = item.Element ("title").Value;
-				//	if (title.StartsWith("[PR]") == false) {
-				//		string link = item.Element("link").Value;
-				//		string  discription = item.Element("title").Value;
-				//		yield return new NewsBody(title,discription,link,"Yahoo!");
-				//	}
-				//}
-				foreach (SyndicationItem item in feed.Items) {
-					string title =  item.Title.Text;
-					string discription =  item.Summary.Text;
-					string link =(item.Links.Count > 0
-						? item.Links[0].Uri.AbsolutePath : "");
+				// すぱこーRSSフィードのデータの取得＆出力します。
 
-					yield return new NewsBody(title,discription,link,"");
+				// チャンネル情報を取得します。
+				XElement spxChannel = spx.Element( "channel" );
+
+				//string title = spxChannel.Element( "title" ).Value;
+				//string discription = spxChannel.Element( "description" ).Value;
+				//string pubDate = DateTime.Parse( spxChannel.Element( "pubDate" ).Value ;
+				//string link = spxChannel.Element( "link" ).Value;
+
+				// 各話のデータを取得します。
+				IEnumerable<XElement> spxItems = spxChannel.Elements( "item" );
+
+				foreach( var item in spxItems ) {
+					string title = TryGetElementValue(item,"title");
+					string discription = TryGetElementValue(item,"description" );
+					//string pubDate = TryGetElementValue(item,"pubDate" );
+					string link = TryGetElementValue(item,"link" );
+					newsBody.Add(new NewsBody(title,discription,link,"Yahoo!"));
 				}
+
+			}
+			catch( Exception ex ) {
+				Console.WriteLine( $"エラー : {ex.Message}" );
 			}
 		}
+
+		return newsBody;
 	}
 
-	IEnumerable GetRSSstring(string site) {
-		WebClient wc = new WebClient();
-		wc.Encoding = System.Text.Encoding.UTF8;
+	string TryGetElementValue(XElement parentEl, string elementName, string defaultValue = null) 
+	{
+		var foundEl = parentEl.Element(elementName);
 
-		Uri url = new Uri(site);
-		string result = "";
-		//CountTex.GetComponent<TextMesh> ().text = site;
-		try{
-			result = wc.DownloadString(url);
-			Debug.Log( result );
-		}catch( Exception ex ) {
-			//CountTex.GetComponent<TextMesh> ().text = ex.Message;
-			Debug.Log( $"エラー : {ex.Message}" );
+		if (foundEl != null)
+		{
+			return foundEl.Value;
 		}
-		yield return result;
+
+		return defaultValue;
 	}
-	//IEnumerator WaitForRequest(string url)
-	//{
-	//
-	//	UnityWebRequest www = UnityWebRequest.Get(url);
-	//	www.SetRequestHeader("Cache-Control", "max-age=0, no-cache, no-store");
-	//	www.SetRequestHeader("Pragma", "no-cache");
-	//	www.SetRequestHeader("Accept-Language", "ja");
-	//	www.SetRequestHeader("Content-Type", "application/json; charset=utf-8");
-	//
-	//	yield return www.Send();
-	//	if (www.isError)
-	//	{
-	//		CountTex.GetComponent<TextMesh> ().text = www.error;
-	//		Debug.Log(www.error);
-	//	}
-	//	else
-	//	{
-	//		if (www.responseCode == 200) {
-	//			// UTF8文字列として取得する
-	//			//Debug.Log(www.responseCode.ToString() + ":" + www.downloadHandler.text);
-	//		}
-	//	}
-	//}
 }
 
 class NewsBody
