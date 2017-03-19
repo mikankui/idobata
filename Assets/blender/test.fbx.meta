@@ -1,0 +1,173 @@
+fileFormatVersion: 2
+guid: 9dcfefa29c4de4457ae0bfb198cdc30f
+timeCreated: 1489942506
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: ashi_1
+    100004: ashi_2
+    100006: ashi_shita2
+    100008: ashi_shita2.001
+    100010: ashi_shita2.001_end
+    100012: ashi_shita2_end
+    100014: ashi_ue1
+    100016: ashi_ue2
+    100018: atama
+    100020: atama_end
+    100022: Camera
+    100024: doutai
+    100026: hana
+    100028: hana_ue
+    100030: kao
+    100032: karada
+    100034: Lamp
+    100036: Master
+    100038: me_1
+    100040: me_2
+    100042: mimi_1
+    100044: mimi_2
+    100046: //RootNode
+    100048: ude_1
+    100050: ude_2
+    100052: ude_shita1
+    100054: ude_shita1_end
+    100056: ude_shita2
+    100058: ude_shita2_end
+    100060: ude_ue1
+    100062: ude_ue2
+    400000: Armature
+    400002: ashi_1
+    400004: ashi_2
+    400006: ashi_shita2
+    400008: ashi_shita2.001
+    400010: ashi_shita2.001_end
+    400012: ashi_shita2_end
+    400014: ashi_ue1
+    400016: ashi_ue2
+    400018: atama
+    400020: atama_end
+    400022: Camera
+    400024: doutai
+    400026: hana
+    400028: hana_ue
+    400030: kao
+    400032: karada
+    400034: Lamp
+    400036: Master
+    400038: me_1
+    400040: me_2
+    400042: mimi_1
+    400044: mimi_2
+    400046: //RootNode
+    400048: ude_1
+    400050: ude_2
+    400052: ude_shita1
+    400054: ude_shita1_end
+    400056: ude_shita2
+    400058: ude_shita2_end
+    400060: ude_ue1
+    400062: ude_ue2
+    2300000: hana
+    2300002: hana_ue
+    2300004: me_1
+    2300006: me_2
+    2300008: mimi_1
+    2300010: mimi_2
+    3300000: hana
+    3300002: hana_ue
+    3300004: me_1
+    3300006: me_2
+    3300008: mimi_1
+    3300010: mimi_2
+    4300000: ashi_2
+    4300002: ashi_1
+    4300004: ude_2
+    4300006: ude_1
+    4300008: karada
+    4300010: kao
+    4300012: hana_ue
+    4300014: me_2
+    4300016: me_1
+    4300018: hana
+    4300020: mimi_2
+    4300022: mimi_1
+    7400000: Armature|byebye
+    7400002: Armature|byebye.001
+    7400004: Armature|byebye.002
+    9500000: //RootNode
+    13700000: ashi_1
+    13700002: ashi_2
+    13700004: kao
+    13700006: karada
+    13700008: ude_1
+    13700010: ude_2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

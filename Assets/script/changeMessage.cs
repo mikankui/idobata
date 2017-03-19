@@ -7,12 +7,16 @@ using System.Net;
 using System.Xml.Linq;
 using System.Xml;
 using UnityEngine.UI;
+using System.Linq;
+using System.IO;
 
 public class changeMessage : MonoBehaviour {
 
 	//GameObject CountTex;
 	Queue<NewsBody> NewsQueue = new Queue<NewsBody>();
 	Coroutine retC;
+	Dictionary<string,string> RLRdict;
+	RssListReader RLR;
 	public GameObject title;
 	public GameObject body;
 	public GameObject link;
@@ -26,9 +30,10 @@ public class changeMessage : MonoBehaviour {
 		// MESSAGE表示フィールドを取得
 		//CountTex = GameObject.Find ("message");
 		// ニュース自動切り替え
-		Time.timeScale = 0.1f;
+		Time.timeScale = 0.5f;
 		retC = StartCoroutine (waitingNextNews());
-
+		RssListReader RLR = new RssListReader ();
+		RLRdict = RLR.ReadList ();
 	}
 
 	// Update is called once per frame
@@ -36,22 +41,20 @@ public class changeMessage : MonoBehaviour {
 
 		//キューにニュースがない場合、ニュースを取得
 		try {
-			if(NewsQueue.Count < 2){
-				var results = GetFromYahoo();
-				foreach (var nb in results){
-					NewsQueue.Enqueue(nb);
-				}
+			if(NewsQueue.Count < 10 && RLRdict.Any()){
+				//GetRSS();
 			}
-
 		}
 		catch( Exception ex ) {
-			//CountTex.GetComponent<TextMesh> ().text = "--エラー--";
 			Debug.Log( $"エラー : {ex.Message}" );
 		}
 
 		TouchInfo info = AppUtil.GetTouch();
 		switch(info){
 		case TouchInfo.Began:
+			if(NewsQueue.Count < 10 && RLRdict.Any()){
+				GetRSS();
+			}
 			break;
 		case TouchInfo.Moved:
 			//aaVector3 delta = AppUtil.GetDeltaPosition();
@@ -89,114 +92,56 @@ public class changeMessage : MonoBehaviour {
 			body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
 			link.GetComponent<UnityEngine.UI.Text>().text = nb.Link;
 			siteName.GetComponent<UnityEngine.UI.Text>().text = nb.SiteName;
-
 		}
 	}
 
-	IEnumerable<NewsBody> GetFromYahoo() {
-		List<string> siteList = new List<string> ();
+	void GetRSS() {
+		//List<string> siteList = new List<string> ();
 		List<NewsBody> newsBody = new List<NewsBody> ();
+		var site = RLRdict.First();
+		RLRdict.Remove(site.Key);
+		Debug.Log ("GET RSS START [{0}]",site.Key);
+		int itemCount = 0;
 
-		//プロトコル違い
-		//siteList.Add ("feed://www3.nhk.or.jp/rss/news/cat0.xml");
+		try {
 
-		//文字コードがSJIS
-		//siteList.Add("http://feed.rssad.jp/rss/news24/index.rdf");
+			// リクエスト送信
+			WwwClient client = new WwwClient();
+			var result = client.GetSample(site.Value);
 
-		//アルファ 解析がうまくいっていない？
-		//siteList.Add ("http://alfalfalfa.com/index.rdf");
+			// 呼び出し後、結果を受けてif/switchで処理を分ける。
+			if (result.IsSuccess == true)
+			{
+				var xmldoc = XDocument.Parse(result.Html);
+				var spxItems = xmldoc.Root.Descendants("item");
 
-		//はてブ 解析がうまくいっていない？
-		//http://sprint-life.hatenablog.com/entry/2014/01/15/203535
-		//siteList.Add ("http://b.hatena.ne.jp/entrylist.rss");
-
-		//asahi
-		//siteList.Add ("http://news.owata-net.com/rss/index.xml");
-
-		//jiji.com
-		//siteList.Add ("http://www.jiji.com");
-
-		//2ch http://web-terminal.blogspot.jp/2013/12/2chrss.html
-		//腹筋崩壊ニュース	
-		siteList.Add ("http://www.fknews-2ch.net/index.rdf");
-		//ニュース30over	
-		http://www.news30over.com/index.rdf
-		//らばQ	
-		siteList.Add ("http://labaq.com/index.rdf");
-		//今日速2ch	
-		siteList.Add ("http://kyousoku.net/index.rdf");
-		//2chまとめ　あうあうあー	
-		siteList.Add ("http://ababababa7.blog.fc2.com/?xml");
-		//biz2+速報	
-		siteList.Add ("http://blog.livedoor.jp/biz_2/index.rdf");
-		//ニュー速どうでしょう	
-		siteList.Add ("http://blog.livedoor.jp/dudeshow/index.rdf");
-		//SS上手にまとめれたー　-SSまとめブログ-	
-		siteList.Add ("http://ssjyouzu.blog.fc2.com/?xml");
-		//Q速報	
-		siteList.Add ("http://blog.livedoor.jp/qsoku/index.rdf");
-		//ぷに速 ver. あんこ	
-		siteList.Add ("http://punisoku.blog54.fc2.com/?xml");
-		//ワニ速	
-		siteList.Add ("http://wanisoku.blog.fc2.com/?xml");
-		//キブ速	
-		siteList.Add ("http://kibu-soku.ldblog.jp/index.rdf");
-		//2ちゅんまとめ	
-		siteList.Add ("http://matomemamasit.seesaa.net/index20.rdf");
-
-
-		//ITmedia
-		siteList.Add("http://rss.rssad.jp/rss/itmnews/2.0/news_bursts.xml");
-
-		//mainiti
-		siteList.Add("http://rss.rssad.jp/rss/mainichi/flash.rss");
-
-		//Yahoo
-		siteList.Add ("http://news.yahoo.co.jp/pickup/world/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/domestic/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/economy/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/entertainment/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/sports/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/computer/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/science/rss.xml");
-		siteList.Add ("http://news.yahoo.co.jp/pickup/local/rss.xml");
-
-
-
-		foreach (var site in siteList) {
-
-			try {
-				// すぱこーRSSフィードの読み込みます。
-				XElement spx = XElement.Load( site );
-
-				// すぱこーRSSフィードのデータの取得＆出力します。
-
-				// チャンネル情報を取得します。
-				XElement spxChannel = spx.Element( "channel" );
-
-				//string title = spxChannel.Element( "title" ).Value;
-				//string discription = spxChannel.Element( "description" ).Value;
-				//string pubDate = DateTime.Parse( spxChannel.Element( "pubDate" ).Value ;
-				//string link = spxChannel.Element( "link" ).Value;
-
-				// 各話のデータを取得します。
-				IEnumerable<XElement> spxItems = spxChannel.Elements( "item" );
-
+				itemCount = spxItems.Count();
 				foreach( var item in spxItems ) {
 					string title = TryGetElementValue(item,"title");
 					string discription = TryGetElementValue(item,"description" );
 					//string pubDate = TryGetElementValue(item,"pubDate" );
 					string link = TryGetElementValue(item,"link" );
-					newsBody.Add(new NewsBody(title,discription,link,"Yahoo!"));
+					newsBody.Add(new NewsBody(title,discription,link,site.Key));
 				}
 
-			}
-			catch( Exception ex ) {
-				Console.WriteLine( $"エラー : {ex.Message}" );
-			}
-		}
+				Debug.Log(string.Format("Key : {0} / COUNT {1}", site.Key, itemCount));
 
-		return newsBody;
+				foreach (var nb in newsBody){
+					NewsQueue.Enqueue(nb);
+				}
+			}
+			else
+			{
+				Debug.Log("失敗時の処理");
+				// ※ 「サーバーとの接続に失敗しました。時間をおいてリトライしてください」的なメッセージを表示する処理を入れる 
+			}
+
+
+		}
+		catch( Exception ex ) {
+			Console.WriteLine( $"エラー : {ex.Message}" );
+		}
+			
 	}
 
 	string TryGetElementValue(XElement parentEl, string elementName, string defaultValue = null) 
@@ -209,6 +154,30 @@ public class changeMessage : MonoBehaviour {
 		}
 
 		return defaultValue;
+	}
+		
+}
+
+public class RssListReader{
+	public Dictionary<string, string> ReadList()
+	{
+		// Read each line of the file into a string array. Each element
+		// of the array is one line of the file.
+		string[] lines = System.IO.File.ReadAllLines(@"Assets/script/rsslist.txt");
+		Dictionary<string, string> links = new Dictionary<string, string>();
+
+		// Display the file contents by using a foreach loop.
+		foreach (string line in lines)
+		{
+			// Use a tab to indent each line of the file.
+			if(! line.StartsWith("#")){
+			    var link = line.Split(',');
+				links.Add (link [0].Trim(new char[] { '"' }), link [1].Trim(new char[] { '"' }));
+				//Debug.Log("["+link [0] +"]["+ link [1]+"]");
+			}
+		}
+		Debug.Log("LINKS COUNT:"+links.Count);
+		return links;
 	}
 }
 
@@ -377,4 +346,43 @@ public enum TouchInfo {
 	/// タッチキャンセル
 	/// </summary>
 	Canceled = 4,
+}
+
+////
+/// 
+
+
+public class WwwClient
+{
+	public WwwClientGetResult GetSample(string url)
+	{
+		var result = new WwwClientGetResult();
+
+		try
+		{
+			// 接続に失敗するとWebExceptionが飛ぶ
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			Stream stream = response.GetResponseStream();
+			var html = new StreamReader(stream).ReadToEnd();
+
+			result.IsSuccess = true;
+			result.Html = html;
+			return result;
+		}
+		catch (WebException e)
+		{
+			// 失敗したらここでキャッチして呼び出し元にExceptionが伝播しないようにする。
+			result.IsSuccess = false;
+			result.Html = "";
+			Debug.Log (e.Message);
+			return result;
+		}
+	}
+}
+
+public class WwwClientGetResult
+{
+	public bool IsSuccess;
+	public string Html;
 }

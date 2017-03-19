@@ -1,0 +1,690 @@
+fileFormatVersion: 2
+guid: 84290a885db4a48968fef745b0a2da68
+timeCreated: 1489942402
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: ashi_1
+    100004: ashi_2
+    100006: ashi_shita2
+    100008: ashi_shita2.001
+    100010: ashi_shita2.001_end
+    100012: ashi_shita2_end
+    100014: ashi_ue1
+    100016: ashi_ue2
+    100018: atama
+    100020: atama_end
+    100022: Camera
+    100024: doutai
+    100026: hana
+    100028: hana_ue
+    100030: kao
+    100032: karada
+    100034: Lamp
+    100036: Master
+    100038: me_1
+    100040: me_2
+    100042: mimi_1
+    100044: mimi_2
+    100046: //RootNode
+    100048: ude_1
+    100050: ude_2
+    100052: ude_shita1
+    100054: ude_shita1_end
+    100056: ude_shita2
+    100058: ude_shita2_end
+    100060: ude_ue1
+    100062: ude_ue2
+    400000: Armature
+    400002: ashi_1
+    400004: ashi_2
+    400006: ashi_shita2
+    400008: ashi_shita2.001
+    400010: ashi_shita2.001_end
+    400012: ashi_shita2_end
+    400014: ashi_ue1
+    400016: ashi_ue2
+    400018: atama
+    400020: atama_end
+    400022: Camera
+    400024: doutai
+    400026: hana
+    400028: hana_ue
+    400030: kao
+    400032: karada
+    400034: Lamp
+    400036: Master
+    400038: me_1
+    400040: me_2
+    400042: mimi_1
+    400044: mimi_2
+    400046: //RootNode
+    400048: ude_1
+    400050: ude_2
+    400052: ude_shita1
+    400054: ude_shita1_end
+    400056: ude_shita2
+    400058: ude_shita2_end
+    400060: ude_ue1
+    400062: ude_ue2
+    2300000: hana
+    2300002: hana_ue
+    2300004: me_1
+    2300006: me_2
+    2300008: mimi_1
+    2300010: mimi_2
+    3300000: hana
+    3300002: hana_ue
+    3300004: me_1
+    3300006: me_2
+    3300008: mimi_1
+    3300010: mimi_2
+    4300000: ashi_2
+    4300002: ashi_1
+    4300004: ude_2
+    4300006: ude_1
+    4300008: karada
+    4300010: kao
+    4300012: hana_ue
+    4300014: me_2
+    4300016: me_1
+    4300018: hana
+    4300020: mimi_2
+    4300022: mimi_1
+    7400000: Armature|byebye
+    7400002: Armature|byebye.001
+    7400004: Armature|byebye.002
+    9500000: //RootNode
+    13700000: ashi_1
+    13700002: ashi_2
+    13700004: kao
+    13700006: karada
+    13700008: ude_1
+    13700010: ude_2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftUpperLeg' not found\n"
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|byebye
+      takeName: Armature|byebye
+      firstFrame: 0
+      lastFrame: 62
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Master
+        weight: 1
+      - path: Armature/Master/ashi_ue1
+        weight: 1
+      - path: Armature/Master/ashi_ue1/ashi_shita2
+        weight: 1
+      - path: Armature/Master/ashi_ue1/ashi_shita2/ashi_shita2_end
+        weight: 0
+      - path: Armature/Master/ashi_ue2
+        weight: 1
+      - path: Armature/Master/ashi_ue2/ashi_shita2.001
+        weight: 1
+      - path: Armature/Master/ashi_ue2/ashi_shita2.001/ashi_shita2.001_end
+        weight: 0
+      - path: Armature/Master/doutai
+        weight: 1
+      - path: Armature/Master/doutai/atama
+        weight: 1
+      - path: Armature/Master/doutai/atama/atama_end
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue1
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue1/ude_shita1
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue1/ude_shita1/ude_shita1_end
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue2
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue2/ude_shita2
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue2/ude_shita2/ude_shita2_end
+        weight: 0
+      - path: ashi_1
+        weight: 0
+      - path: ashi_2
+        weight: 0
+      - path: Camera
+        weight: 0
+      - path: kao
+        weight: 0
+      - path: kao/hana
+        weight: 0
+      - path: kao/hana_ue
+        weight: 0
+      - path: kao/me_1
+        weight: 0
+      - path: kao/me_2
+        weight: 0
+      - path: kao/mimi_1
+        weight: 0
+      - path: kao/mimi_2
+        weight: 0
+      - path: karada
+        weight: 0
+      - path: Lamp
+        weight: 0
+      - path: ude_1
+        weight: 0
+      - path: ude_2
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|byebye.001
+      takeName: Armature|byebye.001
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Master
+        weight: 1
+      - path: Armature/Master/ashi_ue1
+        weight: 1
+      - path: Armature/Master/ashi_ue1/ashi_shita2
+        weight: 1
+      - path: Armature/Master/ashi_ue1/ashi_shita2/ashi_shita2_end
+        weight: 0
+      - path: Armature/Master/ashi_ue2
+        weight: 1
+      - path: Armature/Master/ashi_ue2/ashi_shita2.001
+        weight: 1
+      - path: Armature/Master/ashi_ue2/ashi_shita2.001/ashi_shita2.001_end
+        weight: 0
+      - path: Armature/Master/doutai
+        weight: 1
+      - path: Armature/Master/doutai/atama
+        weight: 1
+      - path: Armature/Master/doutai/atama/atama_end
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue1
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue1/ude_shita1
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue1/ude_shita1/ude_shita1_end
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue2
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue2/ude_shita2
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue2/ude_shita2/ude_shita2_end
+        weight: 0
+      - path: ashi_1
+        weight: 0
+      - path: ashi_2
+        weight: 0
+      - path: Camera
+        weight: 0
+      - path: kao
+        weight: 0
+      - path: kao/hana
+        weight: 0
+      - path: kao/hana_ue
+        weight: 0
+      - path: kao/me_1
+        weight: 0
+      - path: kao/me_2
+        weight: 0
+      - path: kao/mimi_1
+        weight: 0
+      - path: kao/mimi_2
+        weight: 0
+      - path: karada
+        weight: 0
+      - path: Lamp
+        weight: 0
+      - path: ude_1
+        weight: 0
+      - path: ude_2
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|byebye.002
+      takeName: Armature|byebye.002
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Master
+        weight: 1
+      - path: Armature/Master/ashi_ue1
+        weight: 1
+      - path: Armature/Master/ashi_ue1/ashi_shita2
+        weight: 1
+      - path: Armature/Master/ashi_ue1/ashi_shita2/ashi_shita2_end
+        weight: 0
+      - path: Armature/Master/ashi_ue2
+        weight: 1
+      - path: Armature/Master/ashi_ue2/ashi_shita2.001
+        weight: 1
+      - path: Armature/Master/ashi_ue2/ashi_shita2.001/ashi_shita2.001_end
+        weight: 0
+      - path: Armature/Master/doutai
+        weight: 1
+      - path: Armature/Master/doutai/atama
+        weight: 1
+      - path: Armature/Master/doutai/atama/atama_end
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue1
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue1/ude_shita1
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue1/ude_shita1/ude_shita1_end
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue2
+        weight: 1
+      - path: Armature/Master/doutai/ude_ue2/ude_shita2
+        weight: 0
+      - path: Armature/Master/doutai/ude_ue2/ude_shita2/ude_shita2_end
+        weight: 0
+      - path: ashi_1
+        weight: 0
+      - path: ashi_2
+        weight: 0
+      - path: Camera
+        weight: 0
+      - path: kao
+        weight: 0
+      - path: kao/hana
+        weight: 0
+      - path: kao/hana_ue
+        weight: 0
+      - path: kao/me_1
+        weight: 0
+      - path: kao/me_2
+        weight: 0
+      - path: kao/mimi_1
+        weight: 0
+      - path: kao/mimi_2
+        weight: 0
+      - path: karada
+        weight: 0
+      - path: Lamp
+        weight: 0
+      - path: ude_1
+        weight: 0
+      - path: ude_2
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human:
+    - boneName: Armature
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Master
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: doutai
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ashi_ue2
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ashi_ue1
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ashi_shita2.001
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ashi_shita2
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ude_ue2
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ude_shita1
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: atama
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: test 1(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: test 1(Clone)
+      position: {x: 0.00075600704, y: 0.77616805, z: 1.3830911e-10}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Master
+      parentName: Armature
+      position: {x: -0, y: 0, z: 0.01}
+      rotation: {x: 0.6952662, y: 0.6952663, z: -0.12886007, w: 0.12886001}
+      scale: {x: 1, y: 1, z: 1}
+    - name: doutai
+      parentName: Master
+      position: {x: -0, y: 0, z: -0.01}
+      rotation: {x: 0.49999997, y: 0.5000001, z: 0.50000006, w: 0.4999999}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: ude_ue1
+      parentName: doutai
+      position: {x: -0, y: 0.01, z: 0}
+      rotation: {x: -0.7071068, y: -0.000000015454308, z: -0.000000015454313, w: 0.7071067}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: ude_shita1
+      parentName: ude_ue1
+      position: {x: -0, y: 0.008922229, z: -0.0000000011920929}
+      rotation: {x: 0.3690614, y: -3.4327639e-15, z: -5.206577e-16, w: 0.92940503}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ude_shita1_end
+      parentName: ude_shita1
+      position: {x: -0, y: 0.0060230047, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ude_ue2
+      parentName: doutai
+      position: {x: -0, y: 0.01, z: 0}
+      rotation: {x: 0.000000078702655, y: 0.7071068, z: 0.7071067, w: 0.00000010961127}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ude_shita2
+      parentName: ude_ue2
+      position: {x: -0, y: 0.009092232, z: 0}
+      rotation: {x: 9.52877e-23, y: 0.000000053642207, z: 1.7763568e-15, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ude_shita2_end
+      parentName: ude_shita2
+      position: {x: -0, y: 0.005820647, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: atama
+      parentName: doutai
+      position: {x: -0, y: 0.01, z: 0}
+      rotation: {x: 0, y: -0.000000021855694, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: atama_end
+      parentName: atama
+      position: {x: -0, y: 0.015632194, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ashi_ue1
+      parentName: Master
+      position: {x: -0, y: 0, z: -0.01}
+      rotation: {x: -0.000000044703487, y: -0.000000014901163, z: 0.1348512, w: 0.9908659}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: ashi_shita2
+      parentName: ashi_ue1
+      position: {x: -0, y: 0.004089733, z: 0}
+      rotation: {x: -0.022468604, y: -0.13303493, z: -0.1330353, w: 0.98188525}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ashi_shita2_end
+      parentName: ashi_shita2
+      position: {x: -0, y: 0.0069465586, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ashi_ue2
+      parentName: Master
+      position: {x: -0, y: 0, z: -0.01}
+      rotation: {x: 0.00000021606684, y: 0.00000018626451, z: -0.9908659, w: 0.1348511}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ashi_shita2.001
+      parentName: ashi_ue2
+      position: {x: -0, y: 0.0044276346, z: 0}
+      rotation: {x: 0.13303481, y: 0.9818853, z: -0.022468388, w: 0.13303494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ashi_shita2.001_end
+      parentName: ashi_shita2.001
+      position: {x: -0, y: 0.007019986, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ashi_1
+      parentName: test 1(Clone)
+      position: {x: -0, y: 0.5, z: -0.39999998}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 35, y: 35, z: 50}
+    - name: ashi_2
+      parentName: test 1(Clone)
+      position: {x: -0, y: 0.5, z: 0.39999998}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 35, y: 35, z: 50}
+    - name: Camera
+      parentName: test 1(Clone)
+      position: {x: -7.4811316, y: 5.343665, z: 6.5076394}
+      rotation: {x: 0.21255729, y: 0.904797, z: -0.084389366, w: -0.35922173}
+      scale: {x: 100, y: 100.00001, z: 99.99999}
+    - name: kao
+      parentName: test 1(Clone)
+      position: {x: -0, y: 2.5209618, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 90}
+    - name: hana
+      parentName: kao
+      position: {x: -0.009671339, y: 0, z: 0.000045797824}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.3, y: 0.3, z: 0.33333328}
+    - name: hana_ue
+      parentName: kao
+      position: {x: -0.011747844, y: 0.000060674483, z: 0.00089486357}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.15, y: 0.15, z: 0.16666664}
+    - name: me_1
+      parentName: kao
+      position: {x: -0.0077384, y: -0.0036577, z: 0.0037683127}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.1, y: 0.1, z: 0.1111111}
+    - name: me_2
+      parentName: kao
+      position: {x: -0.0077384, y: 0.0036577, z: 0.0037683127}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.1, y: 0.1, z: 0.1111111}
+    - name: mimi_1
+      parentName: kao
+      position: {x: 0.001, y: 0.006, z: 0.008100424}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.3, y: 0.3, z: 0.33333328}
+    - name: mimi_2
+      parentName: kao
+      position: {x: 0.001, y: -0.006, z: 0.008100424}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.3, y: 0.3, z: 0.33333328}
+    - name: karada
+      parentName: test 1(Clone)
+      position: {x: 0.021867424, y: 1.4712809, z: 0.012298053}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 90, y: 100, z: 100}
+    - name: Lamp
+      parentName: test 1(Clone)
+      position: {x: -4.0762453, y: 5.903862, z: -1.005454}
+      rotation: {x: 0.16907571, y: -0.75588036, z: 0.27217132, w: 0.57094747}
+      scale: {x: 100.00001, y: 100, z: 100}
+    - name: ude_1
+      parentName: test 1(Clone)
+      position: {x: -0, y: 1.6999999, z: -1.12555}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 30.000002, y: 50, z: 25}
+    - name: ude_2
+      parentName: test 1(Clone)
+      position: {x: -0, y: 1.6999999, z: 1.12555}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 30.000002, y: 50, z: 25}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
