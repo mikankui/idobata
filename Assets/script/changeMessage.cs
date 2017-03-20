@@ -34,6 +34,7 @@ public class changeMessage : MonoBehaviour {
 		retC = StartCoroutine (waitingNextNews());
 		RssListReader RLR = new RssListReader ();
 		RLRdict = RLR.ReadList ();
+		GetRSS();
 	}
 
 	// Update is called once per frame
@@ -54,6 +55,7 @@ public class changeMessage : MonoBehaviour {
 		case TouchInfo.Began:
 			if(NewsQueue.Count < 10 && RLRdict.Any()){
 				GetRSS();
+				Debug.Log ("GET RSS");
 			}
 			break;
 		case TouchInfo.Moved:
@@ -100,7 +102,7 @@ public class changeMessage : MonoBehaviour {
 		List<NewsBody> newsBody = new List<NewsBody> ();
 		var site = RLRdict.First();
 		RLRdict.Remove(site.Key);
-		Debug.Log ("GET RSS START [{0}]",site.Key);
+		Debug.Log("GET RSS START "+site.Key);
 		int itemCount = 0;
 
 		try {
@@ -135,8 +137,6 @@ public class changeMessage : MonoBehaviour {
 				Debug.Log("失敗時の処理");
 				// ※ 「サーバーとの接続に失敗しました。時間をおいてリトライしてください」的なメッセージを表示する処理を入れる 
 			}
-
-
 		}
 		catch( Exception ex ) {
 			Console.WriteLine( $"エラー : {ex.Message}" );
