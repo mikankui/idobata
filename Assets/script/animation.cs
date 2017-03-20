@@ -12,8 +12,8 @@ public class animation : MonoBehaviour {
 	void Start ()
 	{
 		// PlayableAPIのノードを作ってAnimatorで再生
-		var playableClip = UnityEngine.Experimental.Director.AnimationClipPlayable.Create(clip);
-		animator.Play(playableClip);
+		//var playableClip = UnityEngine.Experimental.Director.AnimationClipPlayable.Create(clip);
+		//animator.Play(playableClip);
 	}
 
 	// Update is called once per frame

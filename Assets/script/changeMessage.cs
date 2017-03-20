@@ -27,8 +27,6 @@ public class changeMessage : MonoBehaviour {
 
 		//start 
 		Debug.Log("start!!");
-		// MESSAGE表示フィールドを取得
-		//CountTex = GameObject.Find ("message");
 		// ニュース自動切り替え
 		Time.timeScale = 0.5f;
 		retC = StartCoroutine (waitingNextNews());
@@ -72,11 +70,7 @@ public class changeMessage : MonoBehaviour {
 		case TouchInfo.Ended:
 
 			//ニュースの更新
-			NewsBody nb = NewsQueue.Dequeue();
-			title.GetComponent<UnityEngine.UI.Text>().text = nb.Title;  
-			body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
-			link.GetComponent<UnityEngine.UI.Text>().text = nb.Link;
-			siteName.GetComponent<UnityEngine.UI.Text>().text = nb.SiteName;
+			setMessage();
 			//自動切り替え時間のリセット
 			StopCoroutine(retC);
 			retC = StartCoroutine (waitingNextNews());
@@ -89,14 +83,25 @@ public class changeMessage : MonoBehaviour {
 		while (true) {
 			yield return new WaitForSecondsRealtime (4.0f);
 			//ニュースの更新
+			setMessage();
+		}
+	}
+
+	void setMessage()
+	{
+		if (NewsQueue.Any()) {
 			NewsBody nb = NewsQueue.Dequeue ();
 			title.GetComponent<UnityEngine.UI.Text>().text = nb.Title;  
 			body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
 			link.GetComponent<UnityEngine.UI.Text>().text = nb.Link;
 			siteName.GetComponent<UnityEngine.UI.Text>().text = nb.SiteName;
+		} else {
+			title.GetComponent<UnityEngine.UI.Text>().text = "Please wait...";  
+			body.GetComponent<UnityEngine.UI.Text>().text = "I searching RSS sites.";
+			link.GetComponent<UnityEngine.UI.Text>().text = "";
+			siteName.GetComponent<UnityEngine.UI.Text>().text = "";
 		}
 	}
-
 	void GetRSS() {
 		//List<string> siteList = new List<string> ();
 		List<NewsBody> newsBody = new List<NewsBody> ();
