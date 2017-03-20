@@ -99,12 +99,12 @@ public class changeMessage : MonoBehaviour {
 		if (NewsQueue.Any()) {
 			NewsBody nb = NewsQueue.Dequeue ();
 			title.GetComponent<UnityEngine.UI.Text>().text = nb.Title;  
-			body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
+			//body.GetComponent<UnityEngine.UI.Text>().text = nb.Body;
 			link.GetComponent<UnityEngine.UI.Text>().text = nb.Link;
 			siteName.GetComponent<UnityEngine.UI.Text>().text = nb.SiteName;
 		} else {
 			title.GetComponent<UnityEngine.UI.Text>().text = "Please wait...";  
-			body.GetComponent<UnityEngine.UI.Text>().text = "I searching RSS sites.";
+			//body.GetComponent<UnityEngine.UI.Text>().text = "I searching RSS sites.";
 			link.GetComponent<UnityEngine.UI.Text>().text = "";
 			siteName.GetComponent<UnityEngine.UI.Text>().text = "";
 		}
