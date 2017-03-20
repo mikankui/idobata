@@ -23,16 +23,17 @@ public class changeMessage : MonoBehaviour {
 	public GameObject body;
 	public GameObject link;
 	public GameObject siteName;
+	public GameObject debug;
 
 	// Use this for initialization
 	void Start () {
 
 		//start 
-		Debug.Log("start!!");
+		printDebugInfo("start!!");
 		// ニュース自動切り替え
 		Time.timeScale = 0.5f;
 		retC = StartCoroutine (waitingNextNews());
-		RssListReader RLR = new RssListReader ();
+		RLR = new RssListReader ();
 		RLRdict = RLR.ReadList ();
 		GameObject g = new GameObject( "myHttpClient" );
 		_myHttpClient = g.AddComponent<myHttpClient>();
@@ -46,11 +47,11 @@ public class changeMessage : MonoBehaviour {
 		//キューにニュースがない場合、ニュースを取得
 		try {
 			if(NewsQueue.Count < 10 && RLRdict.Any()){
-				//GetRSS();
+				GetRSS();
 			}
 		}
 		catch( Exception ex ) {
-			Debug.Log( $"エラー : {ex.Message}" );
+			//printDebugInfo( $"エラー : {ex.Message}" );
 		}
 
 		TouchInfo info = AppUtil.GetTouch();
@@ -58,7 +59,7 @@ public class changeMessage : MonoBehaviour {
 		case TouchInfo.Began:
 			if(NewsQueue.Count < 10 && RLRdict.Any()){
 				GetRSS();
-				Debug.Log ("GET RSS");
+				printDebugInfo("GET RSS");
 			}
 			break;
 		case TouchInfo.Moved:
@@ -115,10 +116,10 @@ public class changeMessage : MonoBehaviour {
 		var site = RLRdict.First();
 		string siteName = site.Key;
 		string url = site.Value;
-		Debug.Log("GET RSS START Key : "+siteName);
+		printDebugInfo("GET RSS START Key : "+siteName);
 		_myHttpClient.StartGet(OnComplete, OnError, url, siteName);
 		RLRdict.Remove(siteName);
-		Debug.Log(string.Format("DELETE    Key : {0} / COUNT {1}", siteName, RLRdict.Count()));
+		printDebugInfo(string.Format("DELETE    Key : {0} / COUNT {1}", siteName, RLRdict.Count()));
 	}
 
 	//接続成功
@@ -139,8 +140,8 @@ public class changeMessage : MonoBehaviour {
 			newsBody.Add(new NewsBody(title,discription,link,siteName));
 		}
 
-		Debug.Log(string.Format("GET RSS END    Key : {0} / COUNT {1}", siteName, itemCount));
-
+		printDebugInfo(string.Format("GET RSS END    Key : {0} / COUNT {1}", siteName, itemCount));
+		debug.GetComponent<UnityEngine.UI.Text>().text = string.Format("GET RSS END    Key : {0} / COUNT {1}", siteName, itemCount);
 		foreach (var nb in newsBody){
 			NewsQueue.Enqueue(nb);
 		}
@@ -149,8 +150,8 @@ public class changeMessage : MonoBehaviour {
 	//エラー処理
 	private void OnError(UnityWebRequest request,string siteName)
 	{
-		Debug.Log("GET RSS ERROR Key : "+siteName);
-		Debug.Log("                  : " + request.error);
+		printDebugInfo("GET RSS ERROR Key : "+siteName);
+		//Debug.Log("                  : " + request.error);
 	}
 
 	//Elementのnull対策
@@ -165,28 +166,43 @@ public class changeMessage : MonoBehaviour {
 
 		return defaultValue;
 	}
+
+	private void printDebugInfo(string debuginfo){
+		Debug.Log (debuginfo);
+		debug.GetComponent<UnityEngine.UI.Text>().text = debuginfo;
+	}
 		
 }
 
 public class RssListReader{
+
+	public GameObject debug = GameObject.Find("Debug");
+
 	public Dictionary<string, string> ReadList()
 	{
 		// Read each line of the file into a string array. Each element
 		// of the array is one line of the file.
-		string[] lines = System.IO.File.ReadAllLines(@"Assets/script/rsslist.txt");
-		Dictionary<string, string> links = new Dictionary<string, string>();
-
-		// Display the file contents by using a foreach loop.
-		foreach (string line in lines)
-		{
-			// Use a tab to indent each line of the file.
-			if(! line.StartsWith("#")){
-			    var link = line.Split(',');
-				links.Add (link [0].Trim(new char[] { '"' }), link [1].Trim(new char[] { '"' }));
-				//Debug.Log("["+link [0] +"]["+ link [1]+"]");
+		Dictionary<string, string> links = new Dictionary<string, string>();;
+		debug.GetComponent<UnityEngine.UI.Text>().text = "RssListReader called";
+		try{
+			//string[] lines = System.IO.File.ReadAllLines(@"Assets/script/rsslist.txt");
+			TextAsset t = Resources.Load("text/rsslist", typeof(TextAsset)) as TextAsset;
+			string[] lines = t.text.Replace("\r\n", "\n").Split("\n"[0]);
+			// Display the file contents by using a foreach loop.
+			foreach (string line in lines)
+			{
+				// Use a tab to indent each line of the file.
+				if(! line.StartsWith("#")){
+				    var link = line.Split(',');
+					links.Add (link [0].Trim(new char[] { '"' }), link [1].Trim(new char[] { '"' }));
+					//Debug.Log("["+link [0] +"]["+ link [1]+"]");
+				}
 			}
+		} catch( Exception ex ) {
+			debug.GetComponent<UnityEngine.UI.Text>().text = ex.Message;
 		}
-		Debug.Log("LINKS COUNT:"+links.Count);
+		//printDebugInfo("LINKS COUNT:"+links.Count);
+		//debug.GetComponent<UnityEngine.UI.Text>().text = "LINKS COUNT:"+links.Count;
 		return links;
 	}
 }
@@ -227,45 +243,6 @@ class NewsBody
 		//Debug.Log("{0} : {1} : {2} :{3}",title,body,url,siteName);
 	}
 }
-
-////
-/// 
-
-
-//public class WwwClient
-//{
-//	public WwwClientGetResult GetSample(string url)
-//	{
-//		var result = new WwwClientGetResult();
-//
-//		try
-//		{
-//			// 接続に失敗するとWebExceptionが飛ぶ
-//			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-//			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-//			Stream stream = response.GetResponseStream();
-//			var html = new StreamReader(stream).ReadToEnd();
-//
-//			result.IsSuccess = true;
-//			result.Html = html;
-//			return result;
-//		}
-//		catch (WebException e)
-//		{
-//			// 失敗したらここでキャッチして呼び出し元にExceptionが伝播しないようにする。
-//			result.IsSuccess = false;
-//			result.Html = "";
-//			Debug.Log (e.Message);
-//			return result;
-//		}
-//	}
-//}
-//
-//public class WwwClientGetResult
-//{
-//	public bool IsSuccess;
-//	public string Html;
-//}
 
 //http://qiita.com/JunSuzukiJapan/items/931776ecc2a545b87045#_reference-ab0e42d1db2ce02200bb
 //
