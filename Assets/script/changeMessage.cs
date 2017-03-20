@@ -17,6 +17,8 @@ public class changeMessage : MonoBehaviour {
 	Coroutine retC;
 	Dictionary<string,string> RLRdict;
 	RssListReader RLR;
+	myHttpClient _myHttpClient;
+
 	public GameObject title;
 	public GameObject body;
 	public GameObject link;
@@ -32,6 +34,9 @@ public class changeMessage : MonoBehaviour {
 		retC = StartCoroutine (waitingNextNews());
 		RssListReader RLR = new RssListReader ();
 		RLRdict = RLR.ReadList ();
+		GameObject g = new GameObject( "myHttpClient" );
+		_myHttpClient = g.AddComponent<myHttpClient>();
+
 		GetRSS();
 	}
 
@@ -87,6 +92,7 @@ public class changeMessage : MonoBehaviour {
 		}
 	}
 
+	//GameObjectにメッセージ追加
 	void setMessage()
 	{
 		if (NewsQueue.Any()) {
@@ -102,53 +108,52 @@ public class changeMessage : MonoBehaviour {
 			siteName.GetComponent<UnityEngine.UI.Text>().text = "";
 		}
 	}
-	void GetRSS() {
-		//List<string> siteList = new List<string> ();
-		List<NewsBody> newsBody = new List<NewsBody> ();
+
+	//接続開始
+	public void GetRSS ()
+	{
 		var site = RLRdict.First();
-		RLRdict.Remove(site.Key);
-		Debug.Log("GET RSS START "+site.Key);
-		int itemCount = 0;
-
-		try {
-
-			// リクエスト送信
-			WwwClient client = new WwwClient();
-			var result = client.GetSample(site.Value);
-
-			// 呼び出し後、結果を受けてif/switchで処理を分ける。
-			if (result.IsSuccess == true)
-			{
-				var xmldoc = XDocument.Parse(result.Html);
-				var spxItems = xmldoc.Root.Descendants("item");
-
-				itemCount = spxItems.Count();
-				foreach( var item in spxItems ) {
-					string title = TryGetElementValue(item,"title");
-					string discription = TryGetElementValue(item,"description" );
-					//string pubDate = TryGetElementValue(item,"pubDate" );
-					string link = TryGetElementValue(item,"link" );
-					newsBody.Add(new NewsBody(title,discription,link,site.Key));
-				}
-
-				Debug.Log(string.Format("Key : {0} / COUNT {1}", site.Key, itemCount));
-
-				foreach (var nb in newsBody){
-					NewsQueue.Enqueue(nb);
-				}
-			}
-			else
-			{
-				Debug.Log("失敗時の処理");
-				// ※ 「サーバーとの接続に失敗しました。時間をおいてリトライしてください」的なメッセージを表示する処理を入れる 
-			}
-		}
-		catch( Exception ex ) {
-			Console.WriteLine( $"エラー : {ex.Message}" );
-		}
-			
+		string siteName = site.Key;
+		string url = site.Value;
+		Debug.Log("GET RSS START Key : "+siteName);
+		_myHttpClient.StartGet(OnComplete, OnError, url, siteName);
+		RLRdict.Remove(siteName);
+		Debug.Log(string.Format("DELETE    Key : {0} / COUNT {1}", siteName, RLRdict.Count()));
 	}
 
+	//接続成功
+	private void OnComplete(UnityWebRequest request,string siteName)
+	{
+		List<NewsBody> newsBody = new List<NewsBody> ();
+		int itemCount = 0;
+
+		var xmldoc = XDocument.Parse(request.downloadHandler.text);
+		var spxItems = xmldoc.Root.Descendants("item");
+
+		itemCount = spxItems.Count();
+		foreach( var item in spxItems ) {
+			string title = TryGetElementValue(item,"title");
+			string discription = TryGetElementValue(item,"description" );
+			//string pubDate = TryGetElementValue(item,"pubDate" );
+			string link = TryGetElementValue(item,"link" );
+			newsBody.Add(new NewsBody(title,discription,link,siteName));
+		}
+
+		Debug.Log(string.Format("GET RSS END    Key : {0} / COUNT {1}", siteName, itemCount));
+
+		foreach (var nb in newsBody){
+			NewsQueue.Enqueue(nb);
+		}
+	}
+
+	//エラー処理
+	private void OnError(UnityWebRequest request,string siteName)
+	{
+		Debug.Log("GET RSS ERROR Key : "+siteName);
+		Debug.Log("                  : " + request.error);
+	}
+
+	//Elementのnull対策
 	string TryGetElementValue(XElement parentEl, string elementName, string defaultValue = null) 
 	{
 		var foundEl = parentEl.Element(elementName);
@@ -222,6 +227,45 @@ class NewsBody
 		//Debug.Log("{0} : {1} : {2} :{3}",title,body,url,siteName);
 	}
 }
+
+////
+/// 
+
+
+//public class WwwClient
+//{
+//	public WwwClientGetResult GetSample(string url)
+//	{
+//		var result = new WwwClientGetResult();
+//
+//		try
+//		{
+//			// 接続に失敗するとWebExceptionが飛ぶ
+//			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+//			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+//			Stream stream = response.GetResponseStream();
+//			var html = new StreamReader(stream).ReadToEnd();
+//
+//			result.IsSuccess = true;
+//			result.Html = html;
+//			return result;
+//		}
+//		catch (WebException e)
+//		{
+//			// 失敗したらここでキャッチして呼び出し元にExceptionが伝播しないようにする。
+//			result.IsSuccess = false;
+//			result.Html = "";
+//			Debug.Log (e.Message);
+//			return result;
+//		}
+//	}
+//}
+//
+//public class WwwClientGetResult
+//{
+//	public bool IsSuccess;
+//	public string Html;
+//}
 
 //http://qiita.com/JunSuzukiJapan/items/931776ecc2a545b87045#_reference-ab0e42d1db2ce02200bb
 //
@@ -351,43 +395,4 @@ public enum TouchInfo {
 	/// タッチキャンセル
 	/// </summary>
 	Canceled = 4,
-}
-
-////
-/// 
-
-
-public class WwwClient
-{
-	public WwwClientGetResult GetSample(string url)
-	{
-		var result = new WwwClientGetResult();
-
-		try
-		{
-			// 接続に失敗するとWebExceptionが飛ぶ
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			Stream stream = response.GetResponseStream();
-			var html = new StreamReader(stream).ReadToEnd();
-
-			result.IsSuccess = true;
-			result.Html = html;
-			return result;
-		}
-		catch (WebException e)
-		{
-			// 失敗したらここでキャッチして呼び出し元にExceptionが伝播しないようにする。
-			result.IsSuccess = false;
-			result.Html = "";
-			Debug.Log (e.Message);
-			return result;
-		}
-	}
-}
-
-public class WwwClientGetResult
-{
-	public bool IsSuccess;
-	public string Html;
 }

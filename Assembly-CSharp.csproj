@@ -50,6 +50,7 @@
      <Compile Include="Assets\script\autoFontAguster.cs" />
      <Compile Include="Assets\script\changeMessage.cs" />
      <Compile Include="Assets\script\move.cs" />
+     <Compile Include="Assets\script\myHttpClient.cs" />
      <None Include="Assets\script\rsslist.txt" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
